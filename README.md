@@ -41,7 +41,12 @@ Paste the lines that show the image change, and the `Plan:` line.
 ## Part 4: `kubectl get svc -A` showing dev and prod
 
 ```
-
+C:\Users\MSIS\ms-cloud-devops-lab3\envs\prod>kubectl get svc -A
+NAMESPACE     NAME         TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                  AGE
+default       kubernetes   ClusterIP      10.96.0.1      <none>        443/TCP                  43m
+dev           hello-app    LoadBalancer   10.96.58.243   172.18.0.7    8080:32362/TCP           47s
+kube-system   kube-dns     ClusterIP      10.96.0.10     <none>        53/UDP,53/TCP,9153/TCP   43m
+prod          hello-app    LoadBalancer   10.96.24.231   172.18.0.8    8090:32639/TCP           17s
 ```
 
 ## Break it: the error after deleting `terraform.tfstate`

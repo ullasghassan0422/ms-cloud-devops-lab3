@@ -17,7 +17,7 @@ provider "kubernetes" {
 
 variable "image_tag" {
   type    = string
-  default = "v2"
+  default = "v1"
 }
 
 variable "replicas" {
@@ -30,11 +30,24 @@ variable "port" {
   default = 8080
 }
 
+variable "namespace" {
+  type = string
+}
+
+# NAMESPACE RESOURCE
+
+resource "kubernetes_namespace_v1" "env" {
+  metadata {
+    name = var.namespace
+  }
+}
+
 # DEPLOYMENT RESOURCE
 
 resource "kubernetes_deployment_v1" "hello" {
   metadata {
-    name = "hello-app"
+    name      = "hello-app"
+    namespace = kubernetes_namespace_v1.env.metadata[0].name
   }
 
   spec {
@@ -71,7 +84,8 @@ resource "kubernetes_deployment_v1" "hello" {
 
 resource "kubernetes_service_v1" "hello" {
   metadata {
-    name = "hello-app"
+    name      = "hello-app"
+    namespace = kubernetes_namespace_v1.env.metadata[0].name
   }
 
   spec {
@@ -86,10 +100,4 @@ resource "kubernetes_service_v1" "hello" {
       target_port = 80
     }
   }
-}
-
-# OUTPUT
-
-output "url" {
-  value = "http://localhost:${var.port}"
 }
