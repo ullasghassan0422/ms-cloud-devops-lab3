@@ -74,6 +74,9 @@ prod          hello-app    LoadBalancer   10.96.24.231   172.18.0.8    8090:3263
 ## Break it: the error after deleting `terraform.tfstate`
 
 ```
+Terraform state management was explored by creating a backup of the state file and simulating state-file loss.
+The backup was restored successfully.
+The experiment demonstrated the importance of Terraform state in tracking managed infrastructure.
 
 ```
 
@@ -81,8 +84,13 @@ prod          hello-app    LoadBalancer   10.96.24.231   172.18.0.8    8090:3263
 
 What did you see, and how did you find the cause? One or two sentences.
 
+The Kubernetes Service selector was intentionally changed to an incorrect label. This caused the Service to lose its matching Pod endpoints.
+The problem was identified by checking the Service endpoints and comparing the Service selector with the Pod labels. Restoring the correct selector resolved the issue.
+
 
 
 ## Screenshot
 
 Save a browser screenshot as `screenshot.png` in the repository root.
+screenshot.png
+screenshot2.png
