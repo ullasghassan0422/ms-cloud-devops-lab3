@@ -10,6 +10,12 @@ Paste the `Plan:` line and the summary above it.
 
 ```
 
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + url = "http://localhost:8080"
+
+
 ```
 
 ## Part 1: `terraform output -raw url`
