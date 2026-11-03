@@ -21,7 +21,7 @@ Changes to Outputs:
 ## Part 1: `terraform output -raw url`
 
 ```
-
+    http://localhost:8080
 ```
 
 ## Part 2: plan for the v1 → v2 image change
@@ -29,12 +29,34 @@ Changes to Outputs:
 Paste the lines that show the image change, and the `Plan:` line.
 
 ```
+         # (18 unchanged attributes hidden)
 
+                  ~ container {
+                      ~ image                      = "shripada/hello-app:v1" -> "shripada/hello-app:v2"
+                        name                       = "hello-app"
+                        # (10 unchanged attributes hidden)
+
+                        # (2 unchanged blocks hidden)
+                    }
+        
+Plan: 0 to add, 1 to change, 0 to destroy.
 ```
 
 ## Part 3: plan that found the drift after `kubectl scale`
 
 ```
+    
+      ~ spec {
+          ~ replicas                  = "5" -> "3"
+            # (4 unchanged attributes hidden)
+
+            # (3 unchanged blocks hidden)
+        }
+
+        # (1 unchanged block hidden)
+    
+
+Plan: 0 to add, 1 to change, 0 to destroy.
 
 ```
 
